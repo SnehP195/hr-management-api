@@ -1,4 +1,4 @@
-package personia.hr.controller;
+package personio.hr.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import personia.hr.service.EmployeeService;
+import personio.hr.service.IEmployeeService;
 
 import java.util.Map;
 
@@ -18,7 +18,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final IEmployeeService employeeService;
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getEmployees() {

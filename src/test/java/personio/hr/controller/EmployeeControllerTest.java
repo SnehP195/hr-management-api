@@ -1,4 +1,4 @@
-package personia.hr.controller;
+package personio.hr.controller;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
-import personia.hr.service.EmployeeService;
+import personio.hr.service.IEmployeeService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,73 +19,73 @@ import static org.springframework.http.HttpStatus.OK;
 public class EmployeeControllerTest {
 
     @Mock
-    private EmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     @InjectMocks
     private EmployeeController employeeController;
 
     @Test
     public void shouldCreateEmployeesHierarchySuccessfully() {
-        // Given
+        // Arrange
         Map<String, String> inputTestEmployees = new HashMap<>();
-        inputTestEmployees.put("A", "B");
-        inputTestEmployees.put("B", "C");
+        inputTestEmployees.put("X", "Y");
+        inputTestEmployees.put("Y", "Z");
 
         Map<String, Object> secondSubHierarchy = new HashMap<>();
-        secondSubHierarchy.put("A", new HashMap<>());
+        secondSubHierarchy.put("X", new HashMap<>());
 
         Map<String, Object> firstSubHierarchy = new HashMap<>();
-        firstSubHierarchy.put("B", secondSubHierarchy);
+        firstSubHierarchy.put("Y", secondSubHierarchy);
 
         Map<String, Object> expectedEmployeesHierarchy = new HashMap<>();
-        expectedEmployeesHierarchy.put("C", firstSubHierarchy);
+        expectedEmployeesHierarchy.put("Z", firstSubHierarchy);
 
         Mockito.when(employeeService.createEmployees(inputTestEmployees))
                 .thenReturn(expectedEmployeesHierarchy);
 
-        // When
+        // Act
         ResponseEntity<Map<String, Object>> employeesHierarchyResponse = employeeController.createEmployees(inputTestEmployees);
 
-        // Then
+        // Assert
         Assert.assertEquals(employeesHierarchyResponse.getStatusCode(), OK);
         Assert.assertEquals(employeesHierarchyResponse.getBody(), expectedEmployeesHierarchy);
     }
 
     @Test
     public void shouldGetEmployeesHierarchySuccessfully() {
-        // Given
+        // Arrange
         Map<String, Object> secondSubHierarchy = new HashMap<>();
-        secondSubHierarchy.put("A", new HashMap<>());
+        secondSubHierarchy.put("X", new HashMap<>());
 
         Map<String, Object> firstSubHierarchy = new HashMap<>();
-        firstSubHierarchy.put("B", secondSubHierarchy);
+        firstSubHierarchy.put("Y", secondSubHierarchy);
 
         Map<String, Object> expectedEmployeesHierarchy = new HashMap<>();
-        expectedEmployeesHierarchy.put("C", firstSubHierarchy);
+        expectedEmployeesHierarchy.put("Z", firstSubHierarchy);
 
         Mockito.when(employeeService.getEmployees()).thenReturn(expectedEmployeesHierarchy);
 
-        // When
+        // Act
         ResponseEntity<Map<String, Object>> employeesHierarchyResponse = employeeController.getEmployees();
 
-        // Then
+        // Assert
         Assert.assertEquals(employeesHierarchyResponse.getStatusCode(), OK);
         Assert.assertEquals(employeesHierarchyResponse.getBody(), expectedEmployeesHierarchy);
     }
 
     @Test
     public void shouldGetSpecifiedEmployeeHierarchyCorrectly() {
-        // Given
+        // Arrange
         Map<String, Object> expectedEmployeesHierarchy = new HashMap<>();
-        expectedEmployeesHierarchy.put("C", new HashMap<>());
+        expectedEmployeesHierarchy.put("Z", new HashMap<>());
 
-        Mockito.when(employeeService.getSpecifiedEmployee("B"))
+        Mockito.when(employeeService.getSpecifiedEmployee("Y"))
                 .thenReturn(expectedEmployeesHierarchy);
 
-        // When
-        ResponseEntity<Map<String, Object>> specifiedEmployeeHierarchyResponse = employeeController.getSpecifiedEmployee("B");
+        // Act
+        ResponseEntity<Map<String, Object>> specifiedEmployeeHierarchyResponse = employeeController.getSpecifiedEmployee("Y");
 
-        // Then
+        // Assert
         Assert.assertEquals(specifiedEmployeeHierarchyResponse.getStatusCode(), OK);
         Assert.assertEquals(specifiedEmployeeHierarchyResponse.getBody(), expectedEmployeesHierarchy);
     }

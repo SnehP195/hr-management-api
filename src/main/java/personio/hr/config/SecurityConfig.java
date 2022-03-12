@@ -1,4 +1,4 @@
-package personia.hr.config;
+package personio.hr.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,9 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         auth
                 .inMemoryAuthentication()
-                .withUser("admin")
-                .password(encoder.encode("admin"))
-                .roles("ADMIN");
+                .withUser("administrator")
+                .password(encoder.encode("administrator"))
+                .roles("ADMINISTRATOR");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package personia.hr.domain;
+package personio.hr.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -5,5 +5,5 @@ COPY pom.xml /usr/src/app
 RUN mvn -f /usr/src/app/pom.xml clean package
 
 FROM openjdk:8-jre-alpine
-COPY --from=build /usr/src/app/target/hr-management-api-*.jar /opt/hr-management-api.jar
-CMD java -jar /opt/hr-management-api.jar
+COPY --from=build /usr/src/app/target/personio-hr-management-api-*.jar /opt/personio-hr-management-api.jar
+CMD java -jar /opt/personio-hr-management-api.jar

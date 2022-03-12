@@ -1,4 +1,4 @@
-package personia.hr.exception;
+package personio.hr.exception;
 
 public class NoEmployeeFoundException extends RuntimeException {
 

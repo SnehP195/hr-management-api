@@ -1,4 +1,4 @@
-package personia.hr.exception;
+package personio.hr.exception;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,27 +19,27 @@ public class ExceptionHandlerAdvisorTest {
 
     @Test
     public void shouldHandleEmployeeInputExceptionCorrectly() {
-        // Given
-        List<String> inputs = Arrays.asList("A", "B");
+        // Arrange
+        List<String> inputs = Arrays.asList("X", "Y");
         MultipleRootFoundException multipleRootFoundException = new MultipleRootFoundException(inputs);
 
-        // When
+        // Act
         ResponseEntity<?> responseEntity = exceptionHandlerAdvisor.handleEmployeeInputException(multipleRootFoundException);
 
-        // Then
+        // Assert
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
         Assert.assertEquals(responseEntity.getBody(), multipleRootFoundException.getMessage());
     }
 
     @Test
     public void shouldHandleEmployeeNotFoundExceptionCorrectly() {
-        // Given
+        // Arrange
         NoEmployeeFoundException noEmployeeFoundException = new NoEmployeeFoundException();
 
-        // When
+        // Act
         ResponseEntity<?> responseEntity = exceptionHandlerAdvisor.handleEmployeeNotFoundException(noEmployeeFoundException);
 
-        // Then
+        // Assert
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.NOT_FOUND);
         Assert.assertEquals(responseEntity.getBody(), noEmployeeFoundException.getMessage());
     }

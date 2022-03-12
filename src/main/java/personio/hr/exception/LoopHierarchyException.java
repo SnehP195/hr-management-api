@@ -1,4 +1,4 @@
-package personia.hr.exception;
+package personio.hr.exception;
 
 import java.util.Set;
 

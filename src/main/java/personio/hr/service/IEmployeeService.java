@@ -1,8 +1,8 @@
-package personia.hr.service;
+package personio.hr.service;
 
 import java.util.Map;
 
-public interface EmployeeService {
+public interface IEmployeeService {
     Map<String, Object> getSpecifiedEmployee(String employeeName);
 
     Map<String, Object> getEmployees();
